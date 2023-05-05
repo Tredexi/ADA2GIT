@@ -123,7 +123,7 @@ public class GuiAda extends JFrame {
 		                JOptionPane.showMessageDialog(null, "Nombre del libro:" + palabra );
 		                JOptionPane.showMessageDialog(null,  "Autor:"+ palabra1);
 		                JOptionPane.showMessageDialog(null,  "Editorial:"+ palabra2);
-		           
+		           //yajaira guadalupe pech cupul
 					}
 		            scanner.close();
 				}catch(IOException ex) {
