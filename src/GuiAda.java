@@ -18,7 +18,8 @@ public class GuiAda extends JFrame {
 					GuiAda frame = new GuiAda();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					e.printStackTran ce();
+					
 				}
 			}
 		});
