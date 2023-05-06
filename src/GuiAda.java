@@ -13,16 +13,22 @@ import java.awt.event.ActionEvent;
 import java.io.*;
 import java.util.Scanner;
 import java.util.StringTokenizer;
+import javax.swing.SwingConstants;
 public class GuiAda extends JFrame {
-
+	public Libro Libro1[]= new Libro[5];
+	//public Alumnos arralumno[]=new Alumnos[6];
+	 int i =0;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField textNombre;
+	private JTextField textAutor;
+	private JTextField textEditorial;
+	JButton btnObjeto = new JButton("objeto");
+	
 
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -39,7 +45,10 @@ public class GuiAda extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	
 	public GuiAda() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -50,31 +59,34 @@ public class GuiAda extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Nombre:");
-		lblNewLabel.setBounds(53, 52, 46, 14);
+		lblNewLabel.setBounds(39, 52, 60, 14);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Autor:");
-		lblNewLabel_1.setBounds(53, 110, 46, 14);
+		lblNewLabel_1.setBounds(39, 110, 60, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Editorial:");
-		lblNewLabel_2.setBounds(53, 173, 46, 14);
+		lblNewLabel_2.setBounds(39, 173, 60, 14);
 		contentPane.add(lblNewLabel_2);
-		
-		JButton btnNewButton = new JButton("Escribir");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnLeer = new JButton("Leer");
+		JButton btnEscribir = new JButton("Escribir");
+		btnEscribir.setEnabled(false);
+		btnEscribir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String cadena = textField.getText();
-				String cadena2 = textField_1.getText();
-				String cadena3 = textField_2.getText();
+				String cadena = textNombre.getText();
+				String cadena2 = textAutor.getText();
+				String cadena3 = textEditorial.getText();
 				try {
+					btnEscribir.setEnabled(false);
+					btnLeer.setEnabled(true);
 					File file = new File("Biblioteca.txt");
 					FileWriter fw = new FileWriter(file.getAbsoluteFile());
 					BufferedWriter bw = new BufferedWriter(fw);
 					bw.write(cadena);
 					bw.close();
 					BufferedWriter out = new BufferedWriter(new FileWriter("Archivos/Biblioteca.txt"));
-					String cadena1 = textField.getText()+"\t"+textField_1.getText()+"\t"+textField_2.getText()+"\n";
+					String cadena1 = textNombre.getText()+"\t"+textAutor.getText()+"\t"+textEditorial.getText()+"\n";
 					//Escribimos una linea caracter por caracter
 					for(int i=0;i<cadena1.length();i++) {
 						out.write(cadena1.charAt(i));
@@ -90,24 +102,25 @@ public class GuiAda extends JFrame {
 					excepcion.printStackTrace();
 				}
 				//Borrado
-				textField.setText("");
-				textField_1.setText("");
-				textField_2.setText("");
+				textNombre.setText("");
+				textAutor.setText("");
+				textEditorial.setText("");
 				//Mensaje
-				JOptionPane.showMessageDialog(btnNewButton,"Se ha guardado con exito");
+				JOptionPane.showMessageDialog(btnEscribir,"Se ha guardado con exito");
 				
 			}
 		});
-		btnNewButton.setBounds(241, 52, 89, 23);
-		contentPane.add(btnNewButton);
-		
+		btnEscribir.setBounds(241, 52, 89, 23);
+		contentPane.add(btnEscribir);
+
 		JLabel lblNewLabel_3 = new JLabel("Biblioteca");
 		lblNewLabel_3.setFont(new Font("Stencil", Font.PLAIN, 13));
 		lblNewLabel_3.setBounds(163, 11, 100, 14);
 		contentPane.add(lblNewLabel_3);
 		
-		JButton btnNewButton_1 = new JButton("Leer");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		
+		btnLeer.setEnabled(false);
+		btnLeer.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -121,8 +134,8 @@ public class GuiAda extends JFrame {
 		                String palabra1 = scanner.next();
 		                String palabra2 = scanner.next();
 		                JOptionPane.showMessageDialog(null, "Nombre del libro:" + palabra );
-		                JOptionPane.showMessageDialog(null,  "Autor:"+ palabra1);
-		                JOptionPane.showMessageDialog(null,  "Editorial:"+ palabra2);
+		                JOptionPane.showMessageDialog(null, "Autor:"+ palabra1);
+		                JOptionPane.showMessageDialog(null, "Editorial:"+ palabra2);
 		           //yajaira guadalupe pech cupul
 					}
 		            scanner.close();
@@ -131,27 +144,44 @@ public class GuiAda extends JFrame {
 				}
 			}
 		});
-		btnNewButton_1.setBounds(241, 106, 89, 23);
-		contentPane.add(btnNewButton_1);
+		btnLeer.setBounds(241, 106, 89, 23);
+		contentPane.add(btnLeer);
 		
-		textField = new JTextField();
-		textField.setBounds(121, 49, 86, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		textNombre = new JTextField();
+		textNombre.setBounds(121, 49, 86, 20);
+		contentPane.add(textNombre);
+		textNombre.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(121, 107, 86, 20);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		textAutor = new JTextField();
+		textAutor.setBounds(121, 107, 86, 20);
+		contentPane.add(textAutor);
+		textAutor.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(121, 170, 86, 20);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		textEditorial = new JTextField();
+		textEditorial.setBounds(121, 170, 86, 20);
+		contentPane.add(textEditorial);
+		textEditorial.setColumns(10);
 		
-		JButton btnNewButton_2 = new JButton("obj");
-		btnNewButton_2.setBounds(241, 169, 89, 23);
-		contentPane.add(btnNewButton_2);
+		
+		btnObjeto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if((i<6)&&(i>=0)) {
+					Libro1[i]= new Libro(textNombre.getText(),textAutor.getText(),textEditorial.getText());
+					i++;
+					btnEscribir.setEnabled(true);
+				}
+				else {
+					btnEscribir.setEnabled(false);
+				}
+			}
+		});
+		btnObjeto.setBounds(241, 169, 89, 23);
+		contentPane.add(btnObjeto);
+		
+		JLabel lblNewLabel_4 = new JLabel("Primero guardar en objeto para poder escribir en el documento");
+		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_4.setBounds(0, 201, 429, 14);
+		contentPane.add(lblNewLabel_4);
 	
 	} 
 }
