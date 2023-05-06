@@ -172,6 +172,7 @@ public class GuiAda extends JFrame {
 				}
 				else {
 					btnEscribir.setEnabled(false);
+					JOptionPane.showMessageDialog(null, "No se pueden agregar mas objetos ");
 				}
 			}
 		});
